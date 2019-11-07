@@ -2,9 +2,6 @@
 
 import sys
 
-# The cache parameter is here for if you want to implement
-# a solution that is more efficient than the naive 
-# recursive solution
 def factorial(n, cache=[]):
     # Try to return a cached value
     try:
@@ -14,24 +11,28 @@ def factorial(n, cache=[]):
         if len(cache) == 0:
             cache.extend([1, 1])
         # Generate new factorials from the largest cached
-        for i in range(len(cache), n+1):
-            # And cache each new factorial along the way
-            cache.append(i * cache[i-1])
+        if n >= 2:
+            for i in range(len(cache), n+1):
+                # And cache each new factorial along the way
+                cache.append(i * cache[i-1])
         result = cache[n]
     return result
 
-def eating_cookies(n, cache={}):
+# The cache parameter is here for if you want to implement
+# a solution that is more efficient than the naive 
+# recursive solution
+
+def eating_cookies(n, cache=[]):
+    # Try to return a cached value
     try:
-        return cache[n]
+        result = cache[n]
     except:
-        if n < 0:
-            print("ERROR: No negative numbers allowed")
-        elif n < 4:
-            cache[0] = 1
-            cache[1] = 1
-            cache[2] = 2
-            cache[3] = 4
-    return cache[n]
+        if len(cache) == 0:
+            cache.extend([1, 1, 2, 4])
+        if n >= 4:
+            # 
+        result = cache[n]
+    return result
         
         
     
